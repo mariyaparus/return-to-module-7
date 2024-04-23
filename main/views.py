@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 
 from main.models import Student
 
@@ -25,3 +25,11 @@ def contact(request):
     }
 
     return render(request, 'main/contact.html', context)
+
+
+def view_student(request, pk):
+    student_item = get_object_or_404(Student, pk=pk)
+    context = {
+        'object': student_item
+    }
+    return render(request, 'main/student_detail.html', context)
