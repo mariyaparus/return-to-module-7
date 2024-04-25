@@ -22,3 +22,11 @@ def initial_letter_filter(text, autoescape=True):
         esc = lambda x: x
     result = "<strong>%s</strong>%s" % (esc(first), esc(other))
     return mark_safe(result)
+
+
+@register.filter()
+def mymedia(val):
+    if val:
+        return f'/media/{val}'
+
+    return 'holder.js/100px225?theme=thumb&bg=55595c&fg=eceeef&text=None'
