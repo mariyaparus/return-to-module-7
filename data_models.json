@@ -1,0 +1,139 @@
+[
+  {
+    "model": "main.student",
+    "pk": 10,
+    "fields": {
+      "first_name": "Иван",
+      "last_name": "Иванов",
+      "avatar": "",
+      "email": null,
+      "is_active": false
+    }
+  },
+  {
+    "model": "main.student",
+    "pk": 11,
+    "fields": {
+      "first_name": "Петр",
+      "last_name": "Петров",
+      "avatar": "",
+      "email": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.student",
+    "pk": 12,
+    "fields": {
+      "first_name": "семен",
+      "last_name": "семенов",
+      "avatar": "",
+      "email": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.student",
+    "pk": 13,
+    "fields": {
+      "first_name": "Александр",
+      "last_name": "Александров",
+      "avatar": "",
+      "email": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.student",
+    "pk": 14,
+    "fields": {
+      "first_name": "Мария",
+      "last_name": "Парусова",
+      "avatar": "",
+      "email": null,
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.student",
+    "pk": 16,
+    "fields": {
+      "first_name": "Test1",
+      "last_name": "Testov1",
+      "avatar": "students/38f72ee8-fb5d-4269-b516-b7b630c99b07_qmAac7F.jpeg",
+      "email": "test@sky.pro",
+      "is_active": true
+    }
+  },
+  {
+    "model": "main.subject",
+    "pk": 1,
+    "fields": {
+      "title": "Python",
+      "description": "Python",
+      "student": 16
+    }
+  },
+  {
+    "model": "main.subject",
+    "pk": 2,
+    "fields": {
+      "title": "Django",
+      "description": "Django",
+      "student": 16
+    }
+  },
+  {
+    "model": "main.subject",
+    "pk": 3,
+    "fields": {
+      "title": "Java",
+      "description": "Java",
+      "student": 16
+    }
+  },
+  {
+    "model": "materials.material",
+    "pk": 1,
+    "fields": {
+      "title": "Test!!!",
+      "body": "Test!!!!",
+      "views_count": 1,
+      "is_published": true,
+      "slug": "test"
+    }
+  },
+  {
+    "model": "materials.material",
+    "pk": 3,
+    "fields": {
+      "title": "Test",
+      "body": "Test",
+      "views_count": 4,
+      "is_published": true,
+      "slug": null
+    }
+  },
+  {
+    "model": "materials.material",
+    "pk": 4,
+    "fields": {
+      "title": "Новый тест",
+      "body": "Новый тест",
+      "views_count": 1,
+      "is_published": true,
+      "slug": null
+    }
+  },
+  {
+    "model": "materials.material",
+    "pk": 5,
+    "fields": {
+      "title": "New test",
+      "body": "New test",
+      "views_count": 1,
+      "is_published": true,
+      "slug": "new-test"
+    }
+  }
+]
