@@ -3,7 +3,9 @@
 {% block content %}
 
 <div class="col-12 mb-5">
+    {% if perms.main.add_student %}
     <a class="btn btn-outline-primary" href="{% url 'main:create_student' %}">Добавить студента</a>
+    {% endif %}
 </div>
 
 {% for object in object_list %}
@@ -28,10 +30,14 @@
                 <div class="btn-group">
                     <a href="{% url 'main:view_student' object.pk %}" type="button"
                        class="btn btn-sm btn-outline-secondary">View</a>
+                    {% if perms.main.change_student %}
                     <a href="{% url 'main:update_student' object.pk %}" type="button"
                        class="btn btn-sm btn-outline-secondary">Edit</a>
+                    {% endif %}
+                    {% if user.is_superuser %}
                     <a href="{% url 'main:delete_student' object.pk %}" type="button"
                        class="btn btn-sm btn-outline-danger">Delete</a>
+                    {% endif %}
                 </div>
                 {% if object.is_active %}
                 <a class="btn btn-warning" href="{% url 'main:toggle_activity' object.pk %}">Деактивировать</a>
