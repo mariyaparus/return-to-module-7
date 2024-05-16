@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
 from django.forms import inlineformset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -7,8 +9,9 @@ from main.forms import StudentForm, SubjectForm
 from main.models import Student, Subject
 
 
-class StudentListView(ListView):
+class StudentListView(LoginRequiredMixin, PermissionRequiredMixin, ListView):
     model = Student
+    permission_required = 'main.view_student'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -16,8 +19,9 @@ class StudentListView(ListView):
         return context
 
 
-class StudentDetailView(DetailView):
+class StudentDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView):
     model = Student
+    permission_required = 'main.view_student'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -25,9 +29,10 @@ class StudentDetailView(DetailView):
         return context
 
 
-class StudentCreateView(CreateView):
+class StudentCreateView(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Student
     form_class = StudentForm
+    permission_required = 'main.add_student'
     success_url = reverse_lazy('main:index')
 
     def get_context_data(self, **kwargs):
@@ -36,9 +41,10 @@ class StudentCreateView(CreateView):
         return context
 
 
-class StudentUpdateView(UpdateView):
+class StudentUpdateView(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     model = Student
     form_class = StudentForm
+    permission_required = 'main.change_student'
     success_url = reverse_lazy('main:index')
 
     def get_context_data(self, **kwargs):
@@ -63,9 +69,12 @@ class StudentUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class StudentDeleteView(DeleteView):
+class StudentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Student
     success_url = reverse_lazy('main:index')
+
+    def test_func(self):
+        return self.request.user.is_superuser
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -73,6 +82,7 @@ class StudentDeleteView(DeleteView):
         return context
 
 
+@login_required
 def toggle_activity(request, pk):
     student_item = get_object_or_404(Student, pk=pk)
     if student_item.is_active:
@@ -90,6 +100,7 @@ def toggle_activity(request, pk):
     return redirect(reverse('main:index'), context)
 
 
+@login_required
 def contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
