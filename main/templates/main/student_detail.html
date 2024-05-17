@@ -25,18 +25,32 @@
                             <td>Почта</td>
                             <td>{{ object.email }}</td>
                         </tr>
+                        <!--                        <img class="card-img-top" src="{{ object.avatar|mymedia }}" alt="student">-->
+                        <img class="card-img-top" src="/media/{{ object.avatar}}" alt="student">
                     </table>
-
                 </div>
                 <div class="card-footer">
                 </div>
             </div>
         </div>
-        <div class="col-6">
-            <!--                <img class="card-img-top" src="{{ object.avatar|mymedia }}" alt="student">-->
-            <img class="card-img-top" src="/media/{{ object.avatar}}" alt="student">
+        <div class="col-6 d-flex h-100 p-3 mx-auto flex-column">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Предметы студента
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        {% for subject in subjects %}
+                        <li>{{ subject }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="card-footer">
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 {% endblock %}
