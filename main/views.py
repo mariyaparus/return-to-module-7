@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin, UserPassesTestMixin
+from django.core.cache import cache
 from django.forms import inlineformset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -25,6 +27,15 @@ class StudentDetailView(LoginRequiredMixin, PermissionRequiredMixin, DetailView)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        if settings.CACHE_ENABLED:
+            key = f'subject_list_{self.object.pk}'
+            subject_list = cache.get(key)
+            if subject_list is None:
+                subject_list = self.object.subject_set.all()
+                cache.set(key, subject_list)
+        else:
+            subject_list = self.object.subject_set.all()
+        context['subjects'] = subject_list
         context.update({'title': 'Студент'})
         return context
 
